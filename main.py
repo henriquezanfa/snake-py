@@ -1,7 +1,13 @@
 import random
 import curses
 
-def initConfig():
+def screenConfig():
+    window.border('|', '|', '-', '-', '+', '+', '+', '+')
+
+    curses.curs_set(False)
+    window.keypad(True)
+    window.timeout(100)
+
     curses.curs_set(0)
     window.keypad(1)
     window.timeout(100)
@@ -141,18 +147,13 @@ if __name__ == "__main__":
 
         pontos = setPontos(0)
 
-        window.border('|', '|', '-', '-', '+', '+', '+', '+')
-
-        curses.curs_set(False)
-        window.keypad(True)
-        window.timeout(100)
-
-        initConfig()
+        screenConfig()
 
         food = foodPosition()
-        snake = startSnake()
-
         window.addch(int(food[0]), int(food[1]), '*')
+
+        snake = startSnake()
+        
         screen.refresh()
 
         gameLoop(snake, food, pontos)
